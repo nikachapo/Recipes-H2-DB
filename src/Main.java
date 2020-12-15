@@ -13,11 +13,14 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
-        Authenticator authenticator = new Authenticator(new UserDaoImpl());
-        InputOutput io = new CommandLineIO();
-        UserDao dao = new UserDaoImpl();
+        UserDao userDao = new UserDaoImpl();
         RecipeDao recipeDao = new RecipeDaoImpl();
-        new RecipeApp(authenticator, io, dao, recipeDao).start();
+
+        InputOutput io = new CommandLineIO();
+
+        Authenticator authenticator = new Authenticator(userDao);
+
+        new RecipeApp(authenticator, io, userDao, recipeDao).start();
 
     }
 
